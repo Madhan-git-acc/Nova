@@ -29,7 +29,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 builder.Services.AddCors(opt => opt.AddPolicy("AllowAngular", policy =>
-    policy.WithOrigins("http://localhost:4200", "https://nova-angular-o7047r5yz-madhan-git-accs-projects.vercel.app/")
+    policy.WithOrigins("http://localhost:4200", "https://nova-angular-o7047r5yz-madhan-git-accs-projects.vercel.app")
           .AllowAnyHeader()
           .AllowAnyMethod()
           .AllowCredentials()));
