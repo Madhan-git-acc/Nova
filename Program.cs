@@ -28,11 +28,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 builder.Services.AddAuthorization();
+//builder.Services.AddCors(opt => opt.AddPolicy("AllowAngular", policy =>
+//    policy.WithOrigins("http://localhost:4200", "https://nova-angular-cqnbmp0r0-madhan-git-accs-projects.vercel.app")
+//          .AllowAnyHeader()
+//          .AllowAnyMethod()));
 builder.Services.AddCors(opt => opt.AddPolicy("AllowAngular", policy =>
-    policy.WithOrigins("http://localhost:4200", "https://nova-angular-o7047r5yz-madhan-git-accs-projects.vercel.app")
-          .AllowAnyHeader()
-          .AllowAnyMethod()
-          .AllowCredentials()));
+    policy.SetIsOriginAllowed(origin =>
+        origin.Contains("vercel.app") ||
+        origin.Contains("localhost"))
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
