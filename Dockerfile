@@ -17,6 +17,9 @@ WORKDIR /app
 # Copy the published output from the build stage
 COPY --from=build /app/out .
 
+# Copy the wwwroot folder from the build stage
+COPY --from=build /app/wwwroot ./wwwroot
+
 # Configure the container to listen on port 8080
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://+:8080

@@ -50,6 +50,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseCors("AllowAngular");
+app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

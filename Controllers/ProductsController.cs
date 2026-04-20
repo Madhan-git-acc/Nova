@@ -28,7 +28,13 @@ public class ProductsController : ControllerBase
             .AsQueryable();
 
         if (categoryId.HasValue) query = query.Where(p => p.CategoryId == categoryId);
-        if (!string.IsNullOrEmpty(search)) query = query.Where(p => p.Name.Contains(search) || p.Brand!.Contains(search));
+        if (!string.IsNullOrEmpty(search))
+        {
+            var term = $"%{search.Trim()}%";
+            query = query.Where(p =>
+                EF.Functions.ILike(p.Name, term) ||
+                (p.Brand != null && EF.Functions.ILike(p.Brand, term)));
+        }
         if (minPrice.HasValue) query = query.Where(p => p.Price >= minPrice);
         if (maxPrice.HasValue) query = query.Where(p => p.Price <= maxPrice);
         if (featured.HasValue) query = query.Where(p => p.IsFeatured == featured);
