@@ -29,7 +29,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 builder.Services.AddCors(opt => opt.AddPolicy("AllowAngular", policy =>
-    policy.WithOrigins("http://localhost:4200")
+    policy.WithOrigins("http://localhost:4200", "https://your-angular-app.vercel.app")
           .AllowAnyHeader()
           .AllowAnyMethod()
           .AllowCredentials()));
