@@ -1,0 +1,6 @@
+@CLOTHAPI_HostAddress = http://localhost:5012
+
+GET {{CLOTHAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
